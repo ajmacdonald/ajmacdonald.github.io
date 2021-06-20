@@ -4,36 +4,47 @@
         <title>Tap for Beats Per Minute BPM</title>
         <link rel="icon" type="image/png" sizes="64x64" href="./favicon.png" />
 <script type="text/javascript">
-var WAIT_RESET = 1;
-var count = 0;
-var msecsFirst = 0;
-var msecsPrevious = 0;
+(function() {
+    var WAIT_RESET = 1;
+    var count = 0;
+    var msecsFirst = 0;
+    var msecsPrevious = 0;
 
-function TapForBPM(e) {
-    var msecs = new Date().getTime();
-    if ((msecs - msecsPrevious) > 1000 * WAIT_RESET) { count = 0; }
-    if (count == 0) { msecsFirst = msecs; }
+    function doTap(e) {
+        var msecs = new Date().getTime();
+        if ((msecs - msecsPrevious) > 1000 * WAIT_RESET) {count = 0;}
+        if (count == 0) { msecsFirst = msecs; }
 
-    var bpmAvg = 60000 * count / (msecs - msecsFirst);
-    if (isNaN(bpmAvg)) bpmAvg = 0;
-    document.TAP_DISPLAY.T_AVG.value = Math.round(bpmAvg * 100) / 100;
-    document.TAP_DISPLAY.T_WHOLE.value = Math.round(bpmAvg);
-    count++;
-    document.TAP_DISPLAY.T_TAP.value = count;
-    msecsPrevious = msecs;
-}
-document.onkeypress = TapForBPM;
+        var bpmAvg = 60000 * count / (msecs - msecsFirst);
+        if (isNaN(bpmAvg)) bpmAvg = 0;
+        
+        document.forms.bpm.avg.value = Math.round(bpmAvg * 100) / 100;
+        document.forms.bpm.whole.value = Math.round(bpmAvg);
+        document.forms.bpm.taps.value = ++count;
+        
+        msecsPrevious = msecs;
+    }
+    
+    document.onkeypress = doTap;
+})();
 </script>
 <style>
 body {
-	height: 100%; display: grid; margin: 0; padding: 0;
+	height: 100%;
+    display: grid;
+    margin: 0;
+    padding: 0;
+    background-color: #22272e;
 }
-body, input {
-	font: 16px cambria, consolas, arial; 
-	color: #adbac7; background-color: #22272e;
+label, input {
+    font: 16px cambria, consolas, arial; 
+    background-color: transparent;
 }
 form {
 	margin: auto;
+    padding: 20px 25px;
+    background-color: #272d35;
+    border-radius: 10px;
 }
 label {
 	color: #596e82;
@@ -41,15 +52,32 @@ label {
 	margin: 0 0 5px 0;
 }
 input {
+    color: #adbac7;
 	border: 0;
+    width: 60px;
+}
+input[name=whole] {
+    text-align: center;
+    font-size: 26px;
+    width: 70px;
+    margin-bottom: 10px;
+}
+.details {
+    text-align: right;
+    border-top: 1px solid #34404c;
+    padding-top: 10px;
 }
 </style>
     </head>
 <body>
-<form name="TAP_DISPLAY">
-    <label>Average BPM: <input readonly name="T_AVG"/></label>
-    <label>Nearest Whole: <input readonly name="T_WHOLE"/></label>
-    <label>Timing Taps: <input readonly name="T_TAP"/></label>
+<form name="bpm">
+    <div style="text-align: center">
+        <input readonly disabled name="whole"/>
+    </div>
+    <div class="details">
+        <label>Average: <input readonly disabled name="avg"/></label>
+        <label>Taps: <input readonly disabled name="taps"/></label>
+    </div>
 </form>
 </body>
 </html>
