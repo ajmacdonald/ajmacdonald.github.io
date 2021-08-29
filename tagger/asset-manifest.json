@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.js": "/tagger/static/js/main.caed8fc7.chunk.js",
+    "runtime-main.js": "/tagger/static/js/runtime-main.2c9bb111.js",
+    "static/js/2.18040160.chunk.js": "/tagger/static/js/2.18040160.chunk.js",
+    "index.html": "/tagger/index.html",
+    "static/js/2.18040160.chunk.js.LICENSE.txt": "/tagger/static/js/2.18040160.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.2c9bb111.js",
+    "static/js/2.18040160.chunk.js",
+    "static/js/main.caed8fc7.chunk.js"
+  ]
+}
