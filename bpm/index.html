@@ -26,6 +26,8 @@
     }
     
     document.onkeypress = doTap;
+    document.onmousedown = doTap;
+    document.ontouchstart = doTap;
 })();
 </script>
 <style>
@@ -35,6 +37,7 @@ body {
     margin: 0;
     padding: 0;
     background-color: #22272e;
+    user-select: none;
 }
 label, input {
     font: 16px cambria, caladea, consolas, arial; 
@@ -55,6 +58,7 @@ input {
     color: #adbac7;
 	border: 0;
     width: 60px;
+    pointer-events: none;
 }
 input[name=whole] {
     text-align: center;
